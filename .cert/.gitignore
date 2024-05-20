@@ -1,0 +1,6 @@
+*
+!.gitignore
+
+!npm install mkcert-prebuilt
+!"create-cert": "mkcert example.org localhost 127.0.0.1 ::1"
+!"install mkcert install"
