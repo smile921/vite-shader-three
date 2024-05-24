@@ -5,10 +5,11 @@ import 'nprogress/nprogress.css'
 import usePermission from '@/hooks/permission'
 import { useUserStore } from '@/store'
 import PageLayout from '@/layout/page-layout.vue'
-import { isLogin } from '@/utils/auth'
-import Login from './modules/login'
+// import { isLogin } from '@/utils/auth'
 import appRoutes from './modules'
+import { toolRoutes } from '../views/index'
 
+console.log(toolRoutes, PageLayout)
 NProgress.configure({ showSpinner: false }) // NProgress Configuration
 
 const router = createRouter({
@@ -16,19 +17,19 @@ const router = createRouter({
   routes: [
     {
       path: '/',
-      redirect: 'login',
+      name: 'home',
+      component: () => import('@/views/home-page/home-page.vue'),
     },
-    Login,
-    {
-      name: 'root',
-      path: '/',
-      component: PageLayout,
-      children: appRoutes,
-    },
+    ...appRoutes,
+    ...toolRoutes,
+    // {
+    //   name: 'root',
+    //   path: '/',
+    // },
     {
       path: '/:pathMatch(.*)*',
       name: 'notFound',
-      component: () => import('@/views/not-found/index.vue'),
+      component: () => import('@/views/not-found/not-found.vue'),
     },
   ],
   scrollBehavior() {
@@ -50,38 +51,22 @@ router.beforeEach(async (to, from, next) => {
     }
     NProgress.done()
   }
-  if (isLogin()) {
-    if (userStore.role) {
-      crossroads()
-    } else {
-      try {
-        await userStore.info()
-        crossroads()
-      } catch (error) {
-        next({
-          name: 'login',
-          query: {
-            redirect: to.name,
-            ...to.query,
-          } as LocationQueryRaw,
-        })
-        NProgress.done()
-      }
-    }
+  if (userStore.role) {
+    crossroads()
   } else {
-    if (to.name === 'login') {
-      next()
+    try {
+      await userStore.info()
+      crossroads()
+    } catch (error) {
+      next({
+        name: 'home',
+        query: {
+          redirect: to.name,
+          ...to.query,
+        } as LocationQueryRaw,
+      })
       NProgress.done()
-      return
     }
-    next({
-      name: 'login',
-      query: {
-        redirect: to.name,
-        ...to.query,
-      } as LocationQueryRaw,
-    })
-    NProgress.done()
   }
 })
 

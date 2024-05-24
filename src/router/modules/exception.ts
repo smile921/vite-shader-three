@@ -1,5 +1,5 @@
 export default {
-  path: 'exception',
+  path: '/exception',
   name: 'exception',
   component: () => import('@/views/exception/index.vue'),
   meta: {
