@@ -1,25 +1,39 @@
 <template>
-  <div class="content">
-    <a-result class="result" status="404" :subtitle="'not found'"></a-result>
-    <div class="operation-row">
-      <a-button key="back" type="primary" @click="back">back</a-button>
+  <div class="content" ref="contentRef">
+    home page
+    <div class="grid">
+      <ACard @click="goToCircle">
+        <span>circle</span>
+      </ACard>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, onMounted, ref } from 'vue'
 import { useRouter } from 'vue-router'
 
 export default defineComponent({
   setup() {
     const router = useRouter()
+    const contentRef = ref<HTMLDivElement | null>(null)
     const back = () => {
       // warning： Go to the node that has the permission
-      router.push({ name: 'workplace' })
+      router.push({ name: 'home' })
     }
+    const goToCircle = () => {
+      router.push({ path: '/circle-shader' })
+    }
+    onMounted(()=>{
+      if(contentRef.value){
+        console.log(contentRef.value)
+      }
+    })
+
     return {
       back,
+      goToCircle,
+      contentRef,
     }
   },
 })

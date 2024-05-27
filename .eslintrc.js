@@ -51,7 +51,7 @@ module.exports = {
     'vue/multi-word-component-names': 0,
     // Allow @ts-ignore comment
     '@typescript-eslint/ban-ts-comment': 0,
-    '@typescript-eslint/no-unused-vars': 1,
+    '@typescript-eslint/no-unused-vars': 0,
     '@typescript-eslint/no-empty-function': 1,
     '@typescript-eslint/no-explicit-any': 0,
     'import/extensions': [

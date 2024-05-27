@@ -1,9 +1,9 @@
-import vue from '@vitejs/plugin-vue'
-import vueJsx from '@vitejs/plugin-vue-jsx'
-import { resolve } from 'path'
-import { defineConfig } from 'vite'
-import svgLoader from 'vite-svg-loader'
-import configArcoStyleImportPlugin from './plugin/arcoStyleImport'
+import vue from '@vitejs/plugin-vue';
+import vueJsx from '@vitejs/plugin-vue-jsx';
+import { resolve } from 'path';
+import { defineConfig } from 'vite';
+import svgLoader from 'vite-svg-loader';
+import configArcoStyleImportPlugin from './plugin/arcoStyleImport';
 
 export default defineConfig({
   base: '/',
@@ -42,4 +42,4 @@ export default defineConfig({
       },
     },
   },
-})
+});
