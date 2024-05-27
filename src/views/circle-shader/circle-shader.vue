@@ -18,6 +18,7 @@ import { GridHelper } from 'three'
 import { Material } from 'three'
 import GUI from 'lil-gui'
 import { Vector3 } from 'three'
+import { SphereGeometry, MeshBasicMaterial, Mesh } from 'three'
 
 export default defineComponent({
   setup() {
@@ -68,7 +69,12 @@ export default defineComponent({
       scene.add(gridHelper);
       const gui = new GUI();
       scene.add(gui)
-      
+
+      const geometry = new SphereGeometry( 1, 32, 32 ); 
+      const material = new MeshBasicMaterial( { color: 0x00ff0f } ); 
+      const sphere = new Mesh( geometry, material ); 
+      scene.add( sphere );
+
     }
 
     const renderHandle = () => {

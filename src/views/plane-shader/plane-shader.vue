@@ -6,7 +6,7 @@
 </template>
 
 <script lang="ts">
-import { WebGLRenderer, PerspectiveCamera, Scene, Color } from 'three'
+import { WebGLRenderer, PerspectiveCamera, Scene, Color, Mesh, MeshBasicMaterial, SphereGeometry, PlaneGeometry, DoubleSide } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import { defineComponent, onBeforeUnmount, onMounted, Ref, ref, watch } from 'vue'
 import { useRouter } from 'vue-router' 
@@ -51,6 +51,12 @@ export default defineComponent({
       scene.background = new Color("#ddd")
       camera.position.set(0, 2, 4)
       controls = new OrbitControls(camera, renderer.domElement)
+
+
+      const geometry = new PlaneGeometry( 2, 2 ); 
+      const material = new MeshBasicMaterial( { color: 0x00ff0f, side: DoubleSide } ); 
+      const sphere = new Mesh( geometry, material ); 
+      scene.add( sphere );
     }
 
     const renderHandle = () => {
@@ -68,6 +74,7 @@ export default defineComponent({
 
     return {
       back,
+      canvasRef,
     }
   },
 })

@@ -5,6 +5,9 @@
       <ACard @click="goToCircle">
         <span>circle</span>
       </ACard>
+      <ACard @click="goToPlane">
+        <span>plane</span>
+      </ACard>
     </div>
   </div>
 </template>
@@ -24,6 +27,10 @@ export default defineComponent({
     const goToCircle = () => {
       router.push({ path: '/circle-shader' })
     }
+
+    const goToPlane = () => {
+      router.push({ path: '/plane-shader' })
+    }
     onMounted(()=>{
       if(contentRef.value){
         console.log(contentRef.value)
@@ -33,6 +40,7 @@ export default defineComponent({
     return {
       back,
       goToCircle,
+      goToPlane,
       contentRef,
     }
   },
